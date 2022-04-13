@@ -683,6 +683,8 @@ would match the cluster size. This expander is described in more details
 
 * `priority` - selects the node group that has the highest priority assigned by the user. It's configuration is described in more details [here](expander/priority/readme.md)
 
+* `grpc` - From 1.24.0 onwards, the gRPC expander functions as a gRPC client, and passes expansion decisions to a gRPC server that can be developed out of band with Cluster Autoscaler. Configuration and more details can be found here [here](expander/grpcplugin/README.md)
+
 From 1.23.0 onwards, multiple expanders may be passed, i.e.
 `.cluster-autoscaler --expander=priority,least-waste`
 
@@ -734,6 +736,8 @@ The following startup parameters are supported for cluster autoscaler:
 | `emit-per-nodegroup-metrics` | If true, emit per node group metrics. | false
 | `estimator` | Type of resource estimator to be used in scale up | binpacking
 | `expander` | Type of node group expander to be used in scale up.  | random
+| `grpc-expander-url` | (Available after v1.24.0) URL of the gRPC Expander server, for CA to communicate with | ""
+| `grpc-expander-cert` | (Available after v1.24.0) Location of the volume mounted certificate of the gRPC server if it is configured to communicate over TLS | ""
 | `write-status-configmap` | Should CA write status information to a configmap  | true
 | `status-config-map-name` | The name of the status ConfigMap that CA writes  | cluster-autoscaler-status
 | `max-inactivity` | Maximum time from last recorded autoscaler activity before automatic restart | 10 minutes
